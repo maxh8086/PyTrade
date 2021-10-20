@@ -1,0 +1,71 @@
+Amirboker writing to file:
+
+for( i = 0; i < BarCount; i++ )
+{
+if( Buy[i] )
+{
+  fh = fopen( "C:\\AMIOUTPUT\\"+Name()+".txt", "a"); 
+  if( fh ) 
+   { 
+     y = Year(); 
+     m = Month(); 
+     d = Day(); 
+     r = Hour();
+     e = Minute();
+   
+   for( i = 0; i < BarCount; i++ )
+   if( Buy[i] )
+
+   { 
+      fputs( Name() + "," , fh );
+      ds = StrFormat("%02.0f%02.0f%02.0f,", 
+                     y[ i ], m[ i ], d[ i ] ); 
+      fputs( ds, fh ); 
+     
+      ts = StrFormat("%02.0f:%02.0f,", 
+                     r[ i ],e[ i ]); 
+      fputs( ts, fh ); 
+
+      qs = StrFormat("%.2f,%.2f,%.2f,%.2f,%.0f\n", 
+                     O[ i ],H[ i ],L[ i ],C[ i ],V[ i ] ); 
+      fputs( qs, fh );
+   }
+   fclose( fh );
+   }
+}
+}
+
+
+
+ORBTime = TimeNum()==BT;
+
+
+if(LastValue(ORBTime))
+{
+  fh = fopen( "C:\\AmiOut\\ORB.txt", "w"); 
+  if( fh ) 
+   { 
+    ds = StrFormat("%.2f,%.2f", LastValue(ORBH),LastValue(ORBL)); 
+    fputs( ds, fh ); 
+    fclose( fh );
+   }
+}
+
+
+//Write ORB Range to File for Python:
+
+ORBTime = TimeNum()==BT;
+
+for( i = 0; i < BarCount; i++ )
+{
+	if( ORBTime[i] )
+	{
+	fh = fopen( "C:\\amiPy\\ORB.txt", "w"); 
+	if( fh ) 
+	 { 
+	  ds = StrFormat("%.2f,%.2f", ORBH[i],ORBL[i]); 
+	  fputs( ds, fh ); 
+	 }
+	fclose( fh );
+	}
+}  

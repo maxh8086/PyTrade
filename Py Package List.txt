@@ -1,0 +1,95 @@
+
+cmd >> 
+pip install --upgrade pip
+
+# web scrape
+pip install requests
+
+pip install manager
+
+# Data handling
+pip install pandas
+
+# Option Chain
+pip install nsepython
+
+# Options geeks
+pip install scipy
+pip install mibian
+
+
+# msql connector
+pip install cryptography
+pip install pymysql
+
+# mysql db ORM
+//pip install MySQL-python
+pip install sqlalchemy
+
+#google sheets
+pip install gspread
+pip install gspread_dataframe 
+
+# Excel 
+pip install xlwings
+
+mysql+pymysql://pyadmin:[PASSWORD]@127.0.0.1:3306/eod_data
+
+
+
+function fileWriteLine( filePath, line )
+{	
+	return fileWriteLineAdvanced( filePath, FILE_DEFAULT_WRITE_MODE, FILE_DEFAULT_WRITE_SHARED_FLAG, FILE_DEFAULT_WRITE_RETRY_COUNT, line);
+}
+
+
+_SECTION_BEGIN("VIX");
+lookBack = 252;
+hv = StDev(log(C/Ref(C,-1)),lookBack )*100
+dvix = Prec(hv,2);
+wvix = Prec(hv*sqrt(5),2);
+vix = Prec(hv*sqrt(252),2);
+_SECTION_END();
+
+
+32900
+1100
+ ~ 31800
+1700
+30100
+            # for expiry in r['records']['expiryDates'] :
+            #     ce_values = [data["CE"] for data in r['records']['data'] if "CE" in data and str(data['expiryDate'].lower() == str(expiry).lower())]
+            #     pe_values = [data["PE"] for data in r['records']['data'] if "PE" in data and str(data['expiryDate'].lower() == str(expiry).lower())]
+
+=query('OI Live'!A:AC,"select P,L,H order by L Desc Limit 5")
+&‘dropdown tab location’!C2&
+
+
+
+	BS([underlyingPrice, strikePrice, interestRate, daysToExpiration], \
+			volatility=x, callPrice=y, putPrice=z)
+
+	eg: 
+		c = mibian.BS([1.4565, 1.45, 1, 30], volatility=20)
+		c.callPrice				# Returns the call price
+		c.putPrice				# Returns the put price
+		c.callDelta				# Returns the call delta
+		c.putDelta				# Returns the put delta
+		c.callDelta2			# Returns the call dual delta
+		c.putDelta2				# Returns the put dual delta
+		c.callTheta				# Returns the call theta
+		c.putTheta				# Returns the put theta
+		c.callRho				# Returns the call rho
+		c.putRho				# Returns the put rho
+		c.vega					# Returns the option vega
+		c.gamma					# Returns the option gamma
+
+		c = mibian.BS([1.4565, 1.45, 1, 30], callPrice=0.0359)
+		c.impliedVolatility		# Returns the implied volatility from the call price
+		
+		c = mibian.BS([1.4565, 1.45, 1, 30], putPrice=0.0306)
+		c.impliedVolatility		# Returns the implied volatility from the put price
+		
+		c = mibian.BS([1.4565, 1.45, 1, 30], callPrice=0.0359, putPrice=0.0306)
+		c.putCallParity			# Returns the put-call parity
+		'''

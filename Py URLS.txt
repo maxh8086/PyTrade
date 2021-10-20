@@ -1,0 +1,204 @@
+https://www.nseindia.com/api/equity-stockIndices?index=
+
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY%2050
+
+https://www.nseindia.com/json/option-chain/option-chain.json
+
+
+https://www.nseindia.com/api/option-chain-indices?symbol=BANKNIFTY
+
+
+https://www.nseindia.com/api/option-chain-indices?symbol=BANKNIFTY
+
+https://www.nseindia.com/get-quotes/derivatives?symbol=BANKNIFTY&identifier=OPTIDXBANKNIFTY18-03-2021CE37000.00
+
+
+fno list :
+
+    positions = nsefetch('https://www.nseindia.com/api/equity-stockIndices?index=SECURITIES%20IN%20F%26O')
+
+Option chain : 
+
+        payload = nsefetch('https://www.nseindia.com/api/option-chain-indices?symbol='+symbol)
+        payload = nsefetch('https://www.nseindia.com/api/option-chain-equities?symbol='+symbol)
+
+Quote : 
+
+        payload = nsefetch('https://www.nseindia.com/api/quote-derivative?symbol='+symbol)
+        payload = nsefetch('https://www.nseindia.com/api/quote-equity?symbol='+symbol)
+
+
+eq : 
+
+        payload = nsefetch('https://www.nseindia.com/api/quote-equity?symbol='+symbol)
+                payload = nsefetch('https://www.nseindia.com/api/quote-derivative?symbol='+symbol)
+
+fno : 
+
+        payload = nsefetch('https://www.nseindia.com/api/quote-derivative?symbol='+symbol)
+                payload = nsefetch('https://www.nseindia.com/api/quote-equity?symbol='+symbol)
+
+Holiday : 
+
+        payload = nsefetch('https://www.nseindia.com/api/holiday-master?type=clearing')
+        payload = nsefetch('https://www.nseindia.com/api/holiday-master?type=trading')
+
+Reskts : 
+
+            payload = nsefetch('https://www.nseindia.com/api/corporates-financial-results?index='+index+'&period='+period)
+
+event calander : 
+
+    output = nsefetch('https://www.nseindia.com/api/event-calendar')
+
+
+past result : 
+
+    return nsefetch('https://www.nseindia.com/api/results-comparision?symbol='+symbol)
+
+
+list of stocks in / by indics : 
+
+
+https://www.nseindia.com/companies-listing/corporate-filings-announcements?tabIndex=equity
+https://www.nseindia.com/companies-listing/corporate-filings-board-meetings?tabIndex=equity
+
+https://www.nseindia.com/companies-listing/corporate-filings-actions (corporate action)
+https://www.nseindia.com/companies-listing/corporate-filings-daily-buy-back?tabIndex=equity
+
+# https://www.nseindia.com/companies-listing/corporate-filings-financial-results?tabIndex=equity def nse_results(index="equities",period="Quarterly"):
+
+https://www.nseindia.com/companies-listing/corporate-filings-insider-trading?tabIndex=equity
+https://www.nseindia.com/companies-listing/corporate-filings-regulation-29?tabIndex=equity (promoter regulation)
+
+https://www.nseindia.com/companies-listing/corporate-filings-shareholding-pattern?tabIndex=equity
+
+Historical data
+https://www.nseindia.com/api/historical/cm/equity?symbol=SBIN&series=[%22EQ%22]&from=24-03-2020&to=24-03-2021
+https://www.nseindia.com/api/historical/fo/derivatives?&from=24-03-2020&to=24-03-2021&instrumentType=FUTIDX&symbol=NIFTY
+https://www.nseindia.com/api/historical/fo/derivatives?&from=24-03-2020&to=24-03-2021&instrumentType=FUTSTK&symbol=SBIN
+https://www1.nseindia.com/products/dynaContent/equities/indices/historicalindices.jsp?indexType=NIFTY%2050&fromDate=01-08-2020&toDate=24-03-2021
+https://www1.nseindia.com/products/dynaContent/equities/indices/historicalindices.jsp?indexType=NIFTY%20BANK&fromDate=01-08-2020&toDate=24-03-2021
+<div id="csvContentDiv" style="display:none;">"Date","Open","High","Low","Close","Shares Traded","Turnover (Rs. Cr)":"01-Mar-2021","    14702.50","    14806.80","    14638.55","    14761.55","      507302977","        30030.57":"02-Mar-2021","    14865.30","    14959.10","    14760.80","    14919.10","      621723916","        34647.26":"03-Mar-2021","    15064.40","    15273.15","    14995.80","    15245.60","      544205583","        34567.73":"04-Mar-2021","    15026.75","    15202.35","    14980.20","    15080.75","      534850447","        36036.02":"05-Mar-2021","    14977.95","    15092.35","    14862.10","    14938.10","      640700362","        37811.60":"08-Mar-2021","    15002.45","    15111.15","    14919.90","    14956.20","      580308065","        29518.07":"09-Mar-2021","    15049.90","    15126.85","    14925.45","    15098.40","      675271251","        38365.48":"10-Mar-2021","    15202.15","    15218.45","    15100.85","    15174.80","      404585756","        25603.32":"12-Mar-2021","    15321.15","    15336.30","    14953.60","    15030.95","      493238854","        32195.96":"15-Mar-2021","    15048.40","    15048.40","    14745.85","    14929.50","      467473367","        28118.00":"16-Mar-2021","    14996.10","    15051.60","    14890.65","    14910.45","      437651327","        27975.07":"17-Mar-2021","    14946.55","    14956.55","    14696.05","    14721.30","      479352147","        27983.50":"18-Mar-2021","    14855.50","    14875.20","    14478.60","    14557.85","      542216908","        31339.71":"19-Mar-2021","    14471.15","    14788.25","    14350.10","    14744.00","      919178208","        49011.27":"22-Mar-2021","    14736.30","    14763.90","    14597.85","    14736.40","      458997059","        27345.02":"23-Mar-2021","    14768.55","    14878.60","    14707.00","    14814.75","      474150088","        30322.09":"24-Mar-2021","    14712.45","    14752.35","    14535.00","    14549.40","      456403503","        27868.93":"25-Mar-2021","    14570.90","    14575.60","    14264.40","    14324.90","      606820996","        35350.22":</div>
+
+<span class="download-data-link"><a download="data.csv" target"_blank"="" style="cursor:pointer" href="data:application/csv;charset=utf-8,%22Date%22%2C%22Open%22%2C%22High%22%2C%22Low%22%2C%22Close%22%2C%22Shares%20Traded%22%2C%22Turnover%20(Rs.%20Cr)%22%0A%2201-Mar-2021%22%2C%22%20%20%20%2014702.50%22%2C%22%20%20%20%2014806.80%22%2C%22%20%20%20%2014638.55%22%2C%22%20%20%20%2014761.55%22%2C%22%20%20%20%20%20%20507302977%22%2C%22%20%20%20%20%20%20%20%2030030.57%22%0A%2202-Mar-2021%22%2C%22%20%20%20%2014865.30%22%2C%22%20%20%20%2014959.10%22%2C%22%20%20%20%2014760.80%22%2C%22%20%20%20%2014919.10%22%2C%22%20%20%20%20%20%20621723916%22%2C%22%20%20%20%20%20%20%20%2034647.26%22%0A%2203-Mar-2021%22%2C%22%20%20%20%2015064.40%22%2C%22%20%20%20%2015273.15%22%2C%22%20%20%20%2014995.80%22%2C%22%20%20%20%2015245.60%22%2C%22%20%20%20%20%20%20544205583%22%2C%22%20%20%20%20%20%20%20%2034567.73%22%0A%2204-Mar-2021%22%2C%22%20%20%20%2015026.75%22%2C%22%20%20%20%2015202.35%22%2C%22%20%20%20%2014980.20%22%2C%22%20%20%20%2015080.75%22%2C%22%20%20%20%20%20%20534850447%22%2C%22%20%20%20%20%20%20%20%2036036.02%22%0A%2205-Mar-2021%22%2C%22%20%20%20%2014977.95%22%2C%22%20%20%20%2015092.35%22%2C%22%20%20%20%2014862.10%22%2C%22%20%20%20%2014938.10%22%2C%22%20%20%20%20%20%20640700362%22%2C%22%20%20%20%20%20%20%20%2037811.60%22%0A%2208-Mar-2021%22%2C%22%20%20%20%2015002.45%22%2C%22%20%20%20%2015111.15%22%2C%22%20%20%20%2014919.90%22%2C%22%20%20%20%2014956.20%22%2C%22%20%20%20%20%20%20580308065%22%2C%22%20%20%20%20%20%20%20%2029518.07%22%0A%2209-Mar-2021%22%2C%22%20%20%20%2015049.90%22%2C%22%20%20%20%2015126.85%22%2C%22%20%20%20%2014925.45%22%2C%22%20%20%20%2015098.40%22%2C%22%20%20%20%20%20%20675271251%22%2C%22%20%20%20%20%20%20%20%2038365.48%22%0A%2210-Mar-2021%22%2C%22%20%20%20%2015202.15%22%2C%22%20%20%20%2015218.45%22%2C%22%20%20%20%2015100.85%22%2C%22%20%20%20%2015174.80%22%2C%22%20%20%20%20%20%20404585756%22%2C%22%20%20%20%20%20%20%20%2025603.32%22%0A%2212-Mar-2021%22%2C%22%20%20%20%2015321.15%22%2C%22%20%20%20%2015336.30%22%2C%22%20%20%20%2014953.60%22%2C%22%20%20%20%2015030.95%22%2C%22%20%20%20%20%20%20493238854%22%2C%22%20%20%20%20%20%20%20%2032195.96%22%0A%2215-Mar-2021%22%2C%22%20%20%20%2015048.40%22%2C%22%20%20%20%2015048.40%22%2C%22%20%20%20%2014745.85%22%2C%22%20%20%20%2014929.50%22%2C%22%20%20%20%20%20%20467473367%22%2C%22%20%20%20%20%20%20%20%2028118.00%22%0A%2216-Mar-2021%22%2C%22%20%20%20%2014996.10%22%2C%22%20%20%20%2015051.60%22%2C%22%20%20%20%2014890.65%22%2C%22%20%20%20%2014910.45%22%2C%22%20%20%20%20%20%20437651327%22%2C%22%20%20%20%20%20%20%20%2027975.07%22%0A%2217-Mar-2021%22%2C%22%20%20%20%2014946.55%22%2C%22%20%20%20%2014956.55%22%2C%22%20%20%20%2014696.05%22%2C%22%20%20%20%2014721.30%22%2C%22%20%20%20%20%20%20479352147%22%2C%22%20%20%20%20%20%20%20%2027983.50%22%0A%2218-Mar-2021%22%2C%22%20%20%20%2014855.50%22%2C%22%20%20%20%2014875.20%22%2C%22%20%20%20%2014478.60%22%2C%22%20%20%20%2014557.85%22%2C%22%20%20%20%20%20%20542216908%22%2C%22%20%20%20%20%20%20%20%2031339.71%22%0A%2219-Mar-2021%22%2C%22%20%20%20%2014471.15%22%2C%22%20%20%20%2014788.25%22%2C%22%20%20%20%2014350.10%22%2C%22%20%20%20%2014744.00%22%2C%22%20%20%20%20%20%20919178208%22%2C%22%20%20%20%20%20%20%20%2049011.27%22%0A%2222-Mar-2021%22%2C%22%20%20%20%2014736.30%22%2C%22%20%20%20%2014763.90%22%2C%22%20%20%20%2014597.85%22%2C%22%20%20%20%2014736.40%22%2C%22%20%20%20%20%20%20458997059%22%2C%22%20%20%20%20%20%20%20%2027345.02%22%0A%2223-Mar-2021%22%2C%22%20%20%20%2014768.55%22%2C%22%20%20%20%2014878.60%22%2C%22%20%20%20%2014707.00%22%2C%22%20%20%20%2014814.75%22%2C%22%20%20%20%20%20%20474150088%22%2C%22%20%20%20%20%20%20%20%2030322.09%22%0A%2224-Mar-2021%22%2C%22%20%20%20%2014712.45%22%2C%22%20%20%20%2014752.35%22%2C%22%20%20%20%2014535.00%22%2C%22%20%20%20%2014549.40%22%2C%22%20%20%20%20%20%20456403503%22%2C%22%20%20%20%20%20%20%20%2027868.93%22%0A%2225-Mar-2021%22%2C%22%20%20%20%2014570.90%22%2C%22%20%20%20%2014575.60%22%2C%22%20%20%20%2014264.40%22%2C%22%20%20%20%2014324.90%22%2C%22%20%20%20%20%20%20606820996%22%2C%22%20%20%20%20%20%20%20%2035350.22%22%0A" 
+target="_blank">Download file in csv format</a></span>
+
+
+<div class="xlsdownload">
+<a href="JavaScript:;" onclick="filterHistoricalData(true)"><img src="/assets/images/icon-xls.svg" alt="">Download (.csv)</a>
+</div>
+
+https://www.nseindia.com/api/historical/cm/equity?symbol=SBIN&series=[%22EQ%22]&from=26-03-2020&to=26-03-2021&csv=true
+
+https://www1.nseindia.com/products/dynaContent/equities/indices/historicalindices.jsp?indexType=NIFTY%2050&fromDate=01-03-2021&toDate=25-03-2021
+
+{
+	"Request Headers (1.610 KB)": {
+		"headers": [
+			{
+				"name": "Accept",
+				"value": "*/*"
+			},
+			{
+				"name": "Accept-Encoding",
+				"value": "gzip, deflate, br"
+			},
+			{
+				"name": "Accept-Language",
+				"value": "en-US,en;q=0.5"
+			},
+			{
+				"name": "Connection",
+				"value": "keep-alive"
+			},
+			{
+				"name": "Cookie",
+				"value": "_ga=GA1.2.1796689785.1598606494; pointer=1; sym1=BHARTIARTL; NSE-TEST-1=1910513674.20480.0000; RT=\"z=1&dm=nseindia.com&si=8b373e8a-61e7-4d96-bbe7-fe0f80d17595&ss=kmp3yf1y&sl=0&tt=0&bcn=%2F%2F684d0d3e.akstat.io%2F\"; JSESSIONID=D11A283DCA409796E9B852A182F20091.jvm1; ak_bmsc=2F2737285CE577C2F1B2248A115A094117D25D9CF07E0000A4D85C60A0AA1479~plymHeedQx2mMChRyM+YqVBbU+7Egiw660ZFk7ldfYyDIHiYYlX84PYLeu7AVmQe2DJH8bxbLNY9bVuUwAhikBth6kXLcoNy0Lj0m3QVzAmqhwBYFjBu/rQoHO4nWnJhA/ou2ingPRkJdhcCqhleI8mIzRZiP86leLUfTpn28UZSXm3m7zUwIZz0IvZpon1ej+PDUoTNzZN35SVYeLOAFZdmc0Nx5TfTAb/7A/qi0jyJE=; bm_sv=DBA64E39A4778F7BA4177240925FB044~BShF7RBSndut/wLg+TXhN7uCNnH3paOceB6B/2oyn7cGf01VJ0pZCS9Cc3DoIAB0V5kJu3QrvIVfnqNIXVED4mOaLCnq8OwnGvkg2sPxKhShxs0anhqSKawAP6GJHYB0/YEQaUnNmqadfmoWD/eZ9sM+DrRqE5OlglzfkvHnM7w=; bm_mi=728601BC67B07F099D1BB795F975A57D~g4DZkneBbOSRaeYTM8ycLvVU1sJHNY5T0oD+BgfbYX2LohxDjRQWeqR3JCuUvIbB0KyZdPsCimnvSAKh3sfWOgjtWWxbkwp7frOshbg2kLDNScoIQk0WkI47osjdCg5eJ6gC2uTknpdGyzE5kNKPSBZiT8rpNJ48HIoAm7qrthPcaoANyeZMkXstzVCVZh+/xMGaUVE9iWiCYsV5R9I1Yy+WbsJMAUtq88Xc0bdWD1ryTiyjWsF1k4mHB+y/8pGOgdS1hnneRML9vDCLHngIPYg6d1F+Q3kIsq5R9Cqitetrrcw0jku7YZndXdCbh/SP"
+			},
+			{
+				"name": "Host",
+				"value": "www1.nseindia.com"
+			},
+			{
+				"name": "Referer",
+				"value": "https://www1.nseindia.com/products/content/equities/indices/historical_index_data.htm"
+			},
+			{
+				"name": "User-Agent",
+				"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0"
+			},
+			{
+				"name": "X-Requested-With",
+				"value": "XMLHttpRequest"
+			}
+		]
+	}
+}
+
+
+def nsefetch
+def running_status():
+def fnolist():
+def option_chain(symbol):
+	def nse_optionchain_scrapper(symbol):
+def oi_data_builder():
+def nse_quote(symbol):
+def nse_expirydetails(payload,i='0'):
+def pcr(payload,inp='0'):
+def nse_quote_ltp(symbol,expiryDate="latest",optionType="-",strikePrice=0):
+def nse_optionchain_ltp(payload,strikePrice,optionType,inp=0,intent=""):
+def quote_equity(symbol):
+	def nse_eq(symbol):
+def quote_derivative(symbol):
+	def nse_fno(symbol):
+def holiday_master(type="trading"):
+	def nse_holidays(type="trading"):
+def nse_results(index="equities",period="Quarterly"):
+def nse_events():
+def nse_past_results(symbol):
+def expiry_list(symbol):
+
+
+
+
+
+
+
+
+02235475555/5533 - 10 AM - 5:30 AM
+
+
+# driver = webdriver.Chrome(executable_path=driverpath)
+# driver.get('https://www1.nseindia.com/products/content/equities/indices/historical_index_data.htm')#put here the adress of your page
+# driver.find_elements_by_link_text("Download file in csv format").click()
+
+# chk = driver.find_elements_by_xpath('//span[@class="download-data-link"]/a[contains(.,"Download file in csv format")]')
+# webdriver.ActionChains(driver).move_to_element(chk).click(chk).perform()
+
+# JavascriptExecutor js = (JavascriptExecutor) driver;
+# js.executeScript("arguments[0].click();",driver.findElement(By.xpath("//span[@class='download-data-link']//a")));
+
+# wait = wait(driver, 20)
+# driver.findElement(By.cssSelector("span.download-data-link>a")).click();
+
+# wait.until(EC.element_to_be_clickable((By.XPATH, "//button[text()='Download file in csv format']"))).click()
+# wait.until(EC.element_to_be_clickable(By.xpath('//span[@class="download-data-link"]/a[contains(.,"Download file in csv format")]'))).click()
+
+# driver.find_element_by_link_text('Download file in csv format').click()
+# driver.find_element_by_link_text('download-data-link').click()
+
+# elem = driver.find_elements_by_xpath("//*[@id='csvContentDiv']")#put here the content you have put in Notepad, ie the XPath
+# button_element = driver.find_element_by_id('csvContentDiv')
+# button_element.click()
+# new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(By.linkText("Download file in csv format"))).click()
+# product_button = driver.find_elements_by_xpath("//a[@class='download-data-link']")[-3]
+# link = wait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//div[starts-with(normalize-space(), "View all products")]')))
+# link = new WebDriverWait(driver, 20).until( ExpectedConditions.elementToBeClickable((By.xpath, '//span[starts-with(a, "Download file in csv format"]'))
+# link.click()
+
+
+# new wait(driver, 20).until( ExpectedConditions.elementToBeClickable( By.xpath('//span[@class="download-data-link"]/a[contains(.,"Download file in csv format")]') ) ).click()
+
+# print(elem.get_attribute("class"))
+# driver.close()

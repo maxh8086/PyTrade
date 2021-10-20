@@ -1,0 +1,24 @@
+_SECTION_BEGIN("Telegram Alerts - Modern Method");
+
+Version(6.17);  //Code is Compatible with 6.17 and Higher
+
+TelegramAlerts = ParamTrigger("Telegram Alert","Send Alert");
+TelegramAPI_ID = ParamStr("Telegram Bot API Key","1389368666:AAECEgV5eTQ4FZ-AX6sog9X9KnGpZEGhRvA");  //Get the Bot API key via BotFather in Telgram
+TelgramCHAT_ID = ParamStr("Telegram Channel ID","-1001456874595");  //Channel ID example : @marketcalls_in
+
+Message = Writeif(Buy,"This is a Test Message from Amibroker for buy signal",Writeif(Buy,"This is a Test Message from Amibroker for buy signal","This is a Test Message from Amibroker for other signal"));
+
+if (Buy)
+{
+ih = InternetOpenURL("https://api.telegram.org/bot"+TelegramAPI_ID+"/sendMessage?chat_id="+TelgramCHAT_ID+"&text="+Message ); 
+if (ih) InternetClose(ih);
+}
+
+if (Short)
+{
+ih = InternetOpenURL("https://api.telegram.org/bot"+TelegramAPI_ID+"/sendMessage?chat_id="+TelgramCHAT_ID+"&text="+Message ); 
+if (ih) InternetClose(ih);
+}
+_SECTION_END();
+
+https://api.telegram.org/bot1389368666:AAECEgV5eTQ4FZ-AX6sog9X9KnGpZEGhRvA/sendMessage?chat_id=-1001456874595&text=Hi

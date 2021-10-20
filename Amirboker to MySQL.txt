@@ -1,0 +1,122 @@
+Data plugin can connect to any database that has corresponding ODBC driver. In order to allow to access data, the table holding quotations needs to have the following columns:
+
+SYMBOL - holding ticker symbol (text - varchar)
+DATE - quotation date / time (DATETIME type - for Microsoft SQL Server, or TIMESTAMP type for mySQL (open source))
+OPEN - open (recommended FLOAT type)
+HIGH - high (recommended FLOAT type)
+LOW - low (recommended FLOAT type)
+CLOSE - close (recommended FLOAT type)
+VOLUME - volume (recommended FLOAT or INT type)
+OPENINT (optional) - open interest - (recommended FLOAT or INT type)
+
+
+
+ALTER TABLE `amipy`.`user` 
+CHANGE COLUMN `partner` `partner` VARCHAR(255) NOT NULL ;
+
+ALTER TABLE `OptionsPrices` DROP FOREIGN KEY `OptionsPrices_fk0`
+
+Amibroker AFL to MySQL : 
+
+Step 1 : 
+Export Data to File : 
+
+// John Bollinger 29 March 2019
+// Copyright Bollinger Capital Management 2019
+// MIT License
+
+// export directory
+directory = "C:\\Users\\Public\\Portfolio\\exports\\";
+// get the symbol
+symbol = Name();
+// extension to use
+extension = ".txt";
+// open export file
+fh = fopen( directory + symbol + extension, "w" );
+if ( fh ) // did we get a file handle?
+{
+    Date_ = DateTime(); // get a list of dates
+    fputs( "Symbol,Date,Open,High,Low,Close,Volume\n", fh ); // write header
+    for ( i = 0; i < BarCount; i++ ) // write the data records
+    {
+        fputs( symbol + "," , fh ); // symbol
+        fputs( DateTimeToStr( Date_[ i ] ) + ",", fh ); // date
+        fputs( StrFormat( "%g,%g,%g,%g,%g\n", open[ i ], high[ i ], low[ i ], close[ i ], volume[ i ] ), fh ); // quotes
+    }
+    fclose( fh ); // close the file
+}
+Buy = 0; // line required by SCAN option
+// That's all Folks!
+
+Step 2 :
+
+Read and import files to MySQL:
+
+# John Bollinger 28 March 2019
+# Copyright Bollinger Capital Management 2019
+# MIT License
+
+import os
+try:
+    import MySQLdb
+    print "MySQL driver loaded"
+except ImportError:
+    print "You need the MySQLdb module."
+    sys.exit(-1)
+
+# Enter your MySQL connect variables here
+host_ = '127.0.0.1'
+user_ = 'your_user_name'
+password_ = 'your_passsword'
+db_ = 'your_database'
+
+# Make a db connection
+try:
+    conn = MySQLdb.connect(host = host_,
+                           user = user_,
+                           passwd = password_,
+                           db = db_,
+                           autocommit=True)
+    print('Connected to DB: {}'.format(host_))
+except MySQLdb.Error, err:
+    print "Can't make the MySQL connection"
+    print "Error %d: %s" % (err.args[0], err.args[1])
+    sys.exit(1)
+
+# load the data into the db
+exportDir = "C:/path/to/your/files/"
+for fileName in os.listdir(exportDir):
+    file = exportDir + fileName
+    ticker = fileName[:-4]
+    curs = conn.cursor()
+    sql = "delete from price where symbol = '" + ticker + "';"
+    curs.execute(sql)
+    sql = "load data local "
+    sql += "infile '" + file
+    sql += "' into table price "
+    sql += "fields terminated by ',' "
+    sql += "LINES TERMINATED BY '\\r\\n' "
+    sql += "ignore 1 lines "
+    sql += "(symbol, @date, open, high, low, close, volume) "
+    sql += "set date = STR_TO_DATE(@date, '%m/%d/%Y');"
+    curs.execute(sql)
+    print(ticker + ' Done')
+conn.close()
+# That's all folks!
+
+
+odbcOpenDatabase("[ODBC]
+DRIVER=SQL Server
+UID=SETAB
+DATABASE=Tfex_AB_ML
+WSID=AB-MT4
+APP=AmiBroker for Windows
+Trusted_Connection=Yes
+SERVER=localhost\SQLEXPRESS
+Description=AB_SQL-MLPrediction");
+
+myClose=odbcGetArray("S50F_ML", "", "xClose");
+//or
+myClose=odbcGetArraySQL("SELECT xClose, DATE FROM S50F_ML WHERE SYMBOL='"+Name()+"' ORDER BY DATE ASC");
+
+

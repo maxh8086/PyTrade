@@ -1,0 +1,375 @@
+[DB_TYPE]+[DB_CONNECTOR]://[USERNAME]:[PASSWORD]@[HOST]:[PORT]/[DB_NAME]
+
+
+SYMBOL - holding ticker symbol (text - varchar)
+DATE - quotation date / time (DATETIME type - for Microsoft SQL Server, or TIMESTAMP type for mySQL (open source))
+OPEN - open (recommended FLOAT type)
+HIGH - high (recommended FLOAT type)
+LOW - low (recommended FLOAT type)
+CLOSE - close (recommended FLOAT type)
+VOLUME - volume (recommended FLOAT or INT type)
+OPENINT (optional) - open interest - (recommended FLOAT or INT type)
+
+
+I imported symbol list as per http://mastersoft.diskstation.me/blog/amibroker-mysql-data-plugin-setting/. And Used custom query as given below in Quotations field.
+
+SELECT "{SYMBOL}" AS `symbol`, `date`, `open`, `high`, `low`, `close`, `volume` FROM `_stock_{SYMBOL}` ORDER BY date DESC
+
+
+AB= new ActiveXObject( "Broker.Application" );
+AB.LoadDatabase("C:\Program Files\AmiBroker\REALTIME"); // Change Datbase
+AB.Import(0, "C:\Users\user\Desktop\OPEN POSITION\AUDJPY_D1.csv","REAL_TIME_DATA.Format" );
+AB.SaveDatabase();
+AB.RefreshAll();
+
+
+import win32com.client
+oAB = win32com.client.Dispatch("Broker.Application")
+// Loop this
+oAB.Import(0, "PATH\\TO\\DATA.txt", "default.format");
+
+
+AB = new ActiveXObject( "Broker.Application" );
+AB.LoadDatabase("C:\\Program Files\\AmiBroker\\REALTIME"); // Change Datbase
+AB.Import(0, "C:\\Users\\user\\Desktop\\OPEN POSITION\\AUDJPY_D1.csv","REAL_TIME_DATA.Format" );
+// Add this line too
+AB.RefreshAll();
+
+$FORMAT Date_YMD,Time,Skip,Ticker,Open,High,Low,Close,Volume
+$SKIPLINES 1
+$SEPARATOR ,T+
+$CONT 1
+$AUTOADD 1
+$OVERWRITE 1
+$DEBUG 1
+$BREAKONERR 1
+$TIMESHIFT 0
+
+
+$FORMAT Ticker, Date_YMD, Time, Open, High, Low, Close
+$SKIPLINES 0
+$SEPARATOR ,
+$CONT 1
+$GROUP 255
+$AUTOADD 1
+$DEBUG 1
+
+for file format : 
+
+NSE:NIFTY,2019-01-03,09:42:15,10672.05,10672.10,10671.65,10672.10
+NSE:NIFTY,2019-01-03,09:42:20,10672.10,10673.30,10671.70,10672.95
+NSE:NIFTY,2019-01-03,09:42:25,10672.95,10673.00,10671.70,10672.25
+NSE:NIFTY,2019-01-03,09:42:30,10672.25,10673.10,10671.80,10672.65
+NSE:NIFTY,2019-01-03,09:42:35,10672.65,10672.80,10671.50,10672.30
+NSE:NIFTY,2019-01-03,09:42:40,10672.30,10672.80,10671.80,10671.85
+NSE:NIFTY,2019-01-03,09:42:45,10671.85,10672.75,10671.80,10671.95
+NSE:NIFTY,2019-01-03,09:42:50,10671.95,10672.00,10670.70,10671.65
+NSE:NIFTY,2019-01-03,09:42:55,10671.65,10671.70,10670.45,10670.85
+NSE:NIFTY,2019-01-03,09:43:00,10670.85,10672.50,10670.85,10671.20
+NSE:NIFTY,2019-01-03,09:43:05,10671.20,10671.25,10670.70,10670.70
+NSE:NIFTY,2019-01-03,09:43:10,10670.70,10671.10,10669.80,10670.20
+NSE:NIFTY,2019-01-03,09:43:15,10670.20,10670.25,10669.40,10669.80
+...
+
+import win32com.client as wcl
+ab = wcl.Dispatch( 'Broker.Application' )
+
+def onBarUpdate(bars, hasNewBar):
+    #this function is called for every 5-sec bar generated
+    if hasNewBar:
+        #print(bars[-1])
+        last_bar = bars[-1]
+        str_to_write = "NSE:NIFTY,%s,%.2f,%.2f,%.2f,%.2f" % (str(bars[-1].time).split('+')[0].replace(' ',','),last_bar.open,last_bar.high,last_bar.low,last_bar.close)
+        logger.info(str_to_write) #this log call writes str_to_write string to NIFTY_LIVE.txt file
+        ab.Import(0, 'C:\\Users\\<username>\\Desktop\\NIFTY_LIVE.txt', "nifty.format");
+        ab.RefreshAll();
+nifty = Index('NIFTY50', 'NSE')
+bars = ib.reqRealTimeBars(nifty, 5, 'TRADES', False)
+bars.updateEvent += onBarUpdate
+ib.sleep(600)
+
+see my post, I was adding data to it at that time.
+For OLE to work, AB doesnt need any extra config.
+
+Just make sure the Object is creating properly.
+
+If you are in doubt, use the copy-paste JScript example from the manual and test it.
+
+Also, make sure the symbol in the file matches whats in the DB.
+Drop the semi-colon from the import line. Not erroneous but redundant :slight_smile:
+outta habit from C/C++ styled languages.
+
+
+
+while(True):
+	time.sleep(4)
+	copyfile('C:\\Users\\user\\Desktop\\NIFTY_LIVE.txt', 'C:\\Users\\<username>\\Desktop\\NIFTY_LIVE_c.txt')
+	ab.Import(0, 'C:\\Users\\user\\Desktop\\NIFTY_LIVE_c.txt', "nifty.format")
+	
+	
+	
+	
+	
+from win32com.client import Dispatch
+import time
+
+AB = Dispatch("Broker.Application")
+AB.Visible = True # will display the AmiBroker UI
+try: 
+	NewA = AB.AnalysisDocs.Open( "C:\\path\\file.apx" )
+	if NewA:
+		NewA.Run( 2 ) # 1 is exploration - 2 backtest
+		while NewA.IsBusy:
+			time.sleep(1)
+
+		export_ok = NewA.Export( "C:\\path\\file1.csv" )
+		NewA.Close()
+		
+		print ('AmiBroker Analysis Export result {}'.format( export_ok ))
+		
+except Exception as e:
+	print("AmiBroker EXCEPTION:")
+	print(e)
+	
+	
+
+import win32com.client
+
+	
+def ImportData(ab, lst):
+    for l in lst:
+        print("Loading database {}".format(os.path.split(l['db'])[1]))
+        ab.LoadDatabase(l['db'])
+        f_lst = sorted(set(glob.glob(l['data'])))
+        for f in f_lst:
+            try:
+                print("Importing datafile {}, using format {}".format(f, l['format']))
+                ab.Import(0, f, l['format'])
+            except e:
+                print("Error importing datafile {}".format(f))
+            else:
+                (newpath, filename) = os.path.split(f)
+                os.rename(f, os.path.join(newpath, "archive", filename))
+                print("Import complete")
+
+        print("Saving Amibroker")
+        ab.RefreshAll()
+        ab.SaveDatabase()
+        print("OK")
+
+
+
+from win32com.client import Dispatch
+import pandas as pd
+cols = [
+    'ticker',
+    'fullname',
+    'pointvalue',
+    'ticksize',
+    'margindeposit',
+    'roundlotsize'
+]
+df = pd.DataFrame(columns=cols)
+ab = Dispatch("Broker.Application")
+for ix, stock in enumerate(ab.Stocks):
+    df.loc[ix] = (stock.Ticker,
+                  stock.FullName,
+                  stock.PointValue,
+                  stock.TickSize,
+                  stock.MarginDeposit,
+                  stock.RoundLotSize)
+print(df)
+
+from win32com.client import Dispatch
+ab = Dispatch("Broker.Application")
+stocks = ab.Stocks
+stocks.Remove(14)
+
+
+
+
+
+
+
+
+
+
+
+import time
+from bs4 import BeautifulSoup
+import json
+import os
+from win32com.client import Dispatch
+
+
+#Get todays date in Y-m-d format to use in the Tiingo API call
+dateToday = str(time.strftime("%Y-%m-%d"))
+
+
+
+
+#Set the paths to where the data will be stored
+#In this example we will create a folder here: Desktop/Data/TiingoEOD
+# and store the csv files there
+
+
+desktop = os.path.expanduser("~/Desktop/")
+dataPath=os.path.join(desktop,'Data/TiingoEOD/')
+
+
+#If no such folder exists, create an empty folder
+if not os.path.exists(dataPath):
+    os.mkdir(dataPath)
+    print 'creating Directory ...'+dataPath
+    
+
+
+
+
+def TiingoDailyDatatoCSV(symbol):
+    """
+    This function will download EOD data from Tiingo.com
+    and write to a csv file called nameOfSymbol.csv
+    """
+    
+   # symbol="TLT"
+    symbolFile=os.path.join(dataPath,symbol+".csv")
+    
+    headers = {
+           'Content-Type': 'application/json',
+           'Authorization' : 'Token xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+           }
+           
+    print "donwloading",symbol, "..."
+    
+    try:
+       response = requests.get("https://api.tiingo.com/tiingo/daily/" + symbol + "/prices?startDate=2000-1-1&endDate="+dateToday,headers=headers)
+        soup = BeautifulSoup(response.content, "html.parser")
+        dic = json.loads(soup.prettify())
+
+
+        row=""
+    for i in range(len(dic)):
+        ##To convert from 2017-06-01T00:00:00.000Z
+        row= row+"\n" + str(dic[i]['date'].split('T')[0]) + "," + str(dic[i]['adjOpen']) + "," +  str(dic[i]['adjHigh']) + "," +  str(dic[i]['adjLow']) + "," + str(dic[i]['adjClose']) + "," + str(dic[i]['adjVolume'])
+    
+    f = open(symbolFile,"w") 
+    f.write(row)
+    f.close()
+    
+    print "finished writing ",symbol,"csv file."
+    
+except:
+    print "error downloading ",symbol
+#############################
+#--------------------START -------------
+    
+#This is the import definitions for the csv files             
+ABImportDef="$FORMAT Date_YMD, Open, High, Low, Close, Volume, Skip \n$SKIPLINES 1 \n$SEPARATOR , \n$CONT 1 \n$GROUP 255 \n$AUTOADD 1 \n$DEBUG 1"
+#print ABImportDef
+
+
+print "Starting Amibroker import..."
+
+
+
+
+#This is where the format definition file should be. If there is not one already, create one
+AB_format_file_path='C:/Program Files/AmiBroker/Formats/TiingoEOD.format'
+if not os.path.exists(AB_format_file_path):
+    print 'I will create an import file for Amibroker: ',AB_format_file_path, '...'
+    defFile = open(AB_format_file_path,"w") 
+    defFile.write(ABImportDef)
+    defFile.close()
+    
+data_folders = [
+                (dataPath, "TiingoEOD.format")
+               ]
+               
+    
+# Create AmiBroker object and specify the Amibroker Database to load
+ab = Dispatch("Broker.Application")
+ab.LoadDatabase('C:/Program Files/AmiBroker/LiveSystemsData') #Customize
+
+
+#Get tickers from Amibroker into a list
+Qty = ab.Stocks.Count
+TickerList=[""]
+	
+for i in range(Qty): 
+    ticker=ab.Stocks( i ).Ticker
+    if ticker[0] != "~" and ticker[0] != "^":
+       TickerList.append(ab.Stocks( i ).Ticker)
+       
+print TickerList       
+       
+##---------------Download all tickers and write to csv
+       
+for s in TickerList:
+    TiingoDailyDatatoCSV(s)
+ 
+#--Import csv
+
+
+for (data_folder,format_file) in (data_folders):
+    for file in os.listdir(data_folder):
+        if file[-3:].lower() == "csv":
+            print "Importing to AB:", file, "using:", format_file
+            ab.Import(0, data_folder + "\\" + file, format_file)
+ab.SaveDatabase()
+print 'Finished Import'
+
+
+Python script to import files exported by AB to a MySQL database.
+
+# John Bollinger 28 March 2019
+# Copyright Bollinger Capital Management 2019
+# MIT License
+
+import os
+try:
+    import MySQLdb
+    print "MySQL driver loaded"
+except ImportError:
+    print "You need the MySQLdb module."
+    sys.exit(-1)
+
+# Enter your MySQL connect variables here
+host_ = '127.0.0.1'
+user_ = 'your_user_name'
+password_ = 'your_passsword'
+db_ = 'your_database'
+
+# Make a db connection
+try:
+    conn = MySQLdb.connect(host = host_,
+                           user = user_,
+                           passwd = password_,
+                           db = db_,
+                           autocommit=True)
+    print('Connected to DB: {}'.format(host_))
+except MySQLdb.Error, err:
+    print "Can't make the MySQL connection"
+    print "Error %d: %s" % (err.args[0], err.args[1])
+    sys.exit(1)
+
+# load the data into the db
+exportDir = "C:/path/to/your/files/"
+for fileName in os.listdir(exportDir):
+    file = exportDir + fileName
+    ticker = fileName[:-4]
+    curs = conn.cursor()
+    sql = "delete from price where symbol = '" + ticker + "';"
+    curs.execute(sql)
+    sql = "load data local "
+    sql += "infile '" + file
+    sql += "' into table price "
+    sql += "fields terminated by ',' "
+    sql += "LINES TERMINATED BY '\\r\\n' "
+    sql += "ignore 1 lines "
+    sql += "(symbol, @date, open, high, low, close, volume) "
+    sql += "set date = STR_TO_DATE(@date, '%m/%d/%Y');"
+    curs.execute(sql)
+    print(ticker + ' Done')
+conn.close()
+# That's all folks!

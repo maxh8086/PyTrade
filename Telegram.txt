@@ -1,0 +1,66 @@
+//Coded by Rajandran R 
+//Founder - Marketcalls - https://www.marketcalls.in
+//CoFounder - Traderscafe - http://traderscafe.in
+//Coded on 12th Jun 2019
+/*
+
+Note : Before Using this Code make sure you had followed the below mentioned steps
+
+1)Create a Telegram public channel
+2)Create a Telegram BOT via BotFather
+3)Set the bot as administrator in your channel 
+
+*/
+
+_SECTION_BEGIN("Telegram Alerts - Legacy Method");
+
+
+TelegramAlerts = ParamTrigger("Telegram Alert","Send Alert");
+TelegramAPI_ID = ParamStr("Telegram Bot API Key","854431837:AAEeSAtL_rgxxxxxxxxxx");  //Get the Bot API key via BotFather in Telgram
+TelgramCHAT_ID = ParamStr("Telegram Channel ID","@marketcalls_in"); //Channel ID example : @marketcalls_in
+
+//User Defined Function -> Created using VBscript
+EnableScript("VBScript"); 
+
+<% 
+
+Public Sub Telegram(Message_Text)
+
+
+sAPI_ID = AFL.Var("TelegramAPI_ID")
+sChat_ID = AFL.Var("TelgramCHAT_ID")
+sMSG = Message_Text
+
+'URL to open....
+sUrl = "https://api.telegram.org/bot" & sAPI_ID & "/sendMessage"
+'POST Request to send.
+sRequest = "text=" & sMSG & "&chat_id=" & sChat_ID
+
+
+set oHTTP = CreateObject("Microsoft.XMLHTTP")
+oHTTP.open "POST", sUrl,false
+oHTTP.setRequestHeader "Content-Type", "application/x-www-form-urlencoded"
+oHTTP.setRequestHeader "Content-Length", Len(sRequest)
+oHTTP.send sRequest
+HTTPPost = oHTTP.responseText
+
+
+'Store response 
+'msgbox(objXmlHttpMain.responseText)
+'response.Write (objXmlHttpMain.responseText) 
+
+End Sub 
+
+%> 
+
+tg = GetScriptObject(); 
+
+if (TelegramAlerts)
+{
+//code for Telegram alerts to channel
+
+tg.Telegram("This is Telegram Alert from Amibroker");
+
+}//end Telegram alert
+
+_SECTION_END();
