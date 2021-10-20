@@ -1,0 +1,24 @@
+setting variables
+Files\oi_data_records_010621.json files created
+03-Jun-2021
+2.6666666666666665
+0:00:02.546910 live OI sheet written
+0:00:03.265830 Daily sheet written
+0:00:03.781299 Weekly sheet written
+0:00:04.235234 daily dump sheet written
+nextscan 2021-06-01 16:22:00 RecentScan 2021-06-01 16:21:44 OI tm 16:21 Recent tm 16:21
+False False
+16
+waiting 16 Seconds next daily scan, Timestamp : 2021-06-01 16:21:44.064598 
+0:00:20.266175 execution completed
+03-Jun-2021
+2.6666666666666665
+0:00:02.250049 live OI sheet written
+0:00:02.859103 Daily sheet written
+0:00:03.472828 Weekly sheet written
+0:00:03.937509 daily dump sheet written
+nextscan 2021-06-01 16:23:00 RecentScan 2021-06-01 16:22:04 OI tm 16:22 Recent tm 16:22
+False False
+56
+waiting 56 Seconds next daily scan, Timestamp : 2021-06-01 16:22:04.016635 
+0:00:59.953364 execution completed
